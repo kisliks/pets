@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Контакты — Приют «Лапа Помощи»</title>
+    <style>
+        :root {
+            --primary: #ff7a60;
+            --primary-hover: #e5654c;
+            --text-dark: #2d2d2d;
+            --text-muted: #6b6b6b;
+            --border-color: #cccccc; /* Цвет серой линии */
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+        }
+
+        body {
+            color: var(--text-dark);
+            line-height: 1.6;
+            
+            /* ВАШ ФОН С ЛАПКАМИ (Градиент как заглушка, ваша картинка встанет поверх) */
+            background: linear-gradient(135deg, #fdfbf7 0%, #f3ede2 100%);
+            background-attachment: fixed;
+            
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* ИСПРАВЛЕННАЯ ШАПКА С СЕРОЙ ЛИНИЕЙ */
+        header {
+            position: sticky !important;
+            top: 0 !important;
+            left: 0 !important;
+            width: 100% !important;
+            z-index: 99999 !important;
+            background-color: #ffffff !important; /* Чистый белый цвет скрывает узор */
+            border-bottom: 2px solid var(--border-color) !important; /* Серая разделительная линия */
+            padding: 20px 40px !important;
+            display: flex !important;
+            justify-content: space-between !important;
+            align-items: center !important;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05) !important;
+        }
+
+        .logo {
+            font-size: 22px;
+            font-weight: 800;
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        nav a {
+            margin-left: 25px;
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 700;
+            font-size: 16px;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--primary);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 20px auto 0;
+            padding: 40px 20px;
+            flex-grow: 1;
+            width: 100%;
+        }
+
+        /* Белая подложка для заголовка, чтобы не сливался с лапками */
+        .title-block {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 30px;
+            border-radius: 20px;
+            text-align: center;
+            margin-bottom: 40px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+            border: 1px solid #eee;
+        }
+
+        .page-title {
+            font-size: 36px;
+            font-weight: 900;
+            margin-bottom: 10px;
+        }
+
+        .page-subtitle {
+            color: var(--text-muted);
+            font-size: 16px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Сетка контента */
+        .contacts-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        @media (max-width: 768px) {
+            .contacts-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Карточки информации */
+        .info-cards {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        @media (max-width: 480px) {
+            .info-cards {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .info-card {
+            background: #ffffff;
+            padding: 25px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.04);
+            border: 1px solid #eee;
+        }
+
+        .info-card h3 {
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--primary);
+            margin-bottom: 10px;
+            font-weight: 800;
+        }
+
+        .info-card p {
+            font-weight: 600;
+            font-size: 15px;
+            color: var(--text-dark);
+        }
+
+        /* Форма обратной связи */
+        .contact-form-container {
+            background: #ffffff;
+            padding: 40px;
+            border-radius: 24px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.04);
+            border: 1px solid #eee;
+        }
+
+        .contact-form-container h2 {
+            font-size: 22px;
+            font-weight: 800;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 13px;
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 18px;
+            font-size: 15px;
+            border-radius: 10px;
+            border: 1px solid #dddddd;
+            background-color: #fafafa;
+            outline: none;
+            transition: all 0.3s;
+        }
+
+        .form-control:focus {
+            border-color: var(--primary);
+            background-color: #ffffff;
+            box-shadow: 0 0 0 3px rgba(255,122,96,0.1);
+        }
+
+        textarea.form-control {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .btn {
+            background-color: var(--primary);
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 25px;
+            font-weight: 700;
+            font-size: 15px;
+            cursor: pointer;
+            transition: background 0.3s;
+            width: 100%;
+            box-shadow: 0 5px 15px rgba(255,122,96,0.2);
+        }
+
+        .btn:hover {
+            background-color: var(--primary-hover);
+        }
+
+        /* Блок карты */
+        .map-container {
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.04);
+            height: 350px;
+            border: 1px solid #eee;
+        }
+
+        .footer {
+            background-color: #1a1a1a;
+            color: white;
+            text-align: center;
+            padding: 30px 20px;
+            margin-top: auto;
+        }
+
+        .footer p {
+            font-size: 14px;
+            color: #999;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="index.html" class="logo">🐾 Лапа Помощи</a>
+        <nav>
+            <a href="index.html">Главная</a>
+            <a href="index.html#pets">Наши питомцы</a>
+            <a href="contacts.html" style="color: var(--primary);">Контакты</a>
+        </nav>
+    </header>
+
+    <main class="container">
+        <!-- Блок заголовка с защитой от сливания с фоном -->
+        <div class="title-block">
+            <h1 class="page-title">Связаться с нами</h1>
+            <p class="page-subtitle">Хотите приехать познакомиться с хвостиками или привезти гостинцы? Мы ждем вас!</p>
+        </div>
+
+        <div class="contacts-grid">
+            <!-- Левая колонка: Информация -->
+            <div class="info-cards">
+                <div class="info-card">
+                    <h3>Адрес приюта</h3>
+                    <p>г. Москва,<br>ул. Пушкина, д. 1</p>
+                </div>
+                <div class="info-card">
+                    <h3>Телефоны</h3>
+                    <p>+375 (29) 123-45-67<br>+375 (29) 765-43-21</p>
+                </div>
+                <div class="info-card">
+                    <h3>Часы визитов</h3>
+                    <p>Каждый день<br>с 10:00 до 19:00</p>
+                </div>
+                <div class="info-card">
+                    <h3>Email</h3>
+                    <p>info@lapapomoshi.ru</p>
+                </div>
+            </div>
+
+            <!-- Правая колонка: Форма -->
+            <div class="contact-form-container">
+                <h2>Напишите нам</h2>
+                <form action="#" method="POST">
+                    <div class="form-group">
+                        <label for="name">Ваше имя</label>
+                        <input type="text" id="name" class="form-control" placeholder="Иван" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Электронная почта</label>
+                        <input type="email" id="email" class="form-control" placeholder="example@mail.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Сообщение</label>
+                        <textarea id="message" class="form-control" placeholder="Хочу приехать к Арчи..." required></textarea>
+                    </div>
+                    <button type="submit" class="btn">Отправить</button>
+                </form>
+            </div>
+        </div>
+
+    <footer class="footer">
+        <p>© 2026 Приют для домашних животных «Лапа Помощи». Все права защищены.</p>
+    </footer>
+
+</body>
+</html>

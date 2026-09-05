@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Приют для животных «Лапа Помощи»</title>
+    <style>
+        :root {
+            --primary: #ff7a60;
+            --primary-hover: #e5654c;
+            --bg-light: #fdfbf7;
+            --text-dark: #2d2d2d;
+            --text-muted: #6b6b6b;
+            --card-bg: #ffffff;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+        }
+
+
+    body {
+        background-color: #fdfbf7;
+        /* Паттерн в виде аккуратных лапок или точек */
+        background-image: url('https://img.magnific.com/premium-vector/pet-dog-cat-paw-bowl-seamless-pattern-bones-foot-heart-polka-dot-pattern-background_624123-162.jpg?semt=ais_hybrid&w=740&q=80'); 
+        opacity: 0.95;
+    }
+header {
+    position: sticky !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    z-index: 9999 !important;
+    
+    /* Чистый белый цвет, чтобы скрыть узор лапок под меню */
+    background-color: #ffffff !important; 
+    
+    /* Та самая СЕРАЯ ЛИНИЯ, которая отделит шапку от сайта */
+    border-bottom: 2px solid #d1d1d1 !important; 
+    
+    /* Отступы внутри шапки */
+    padding: 20px 40px !important;
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+}
+
+
+        .logo {
+            font-size: 22px;
+            font-weight: 800;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        nav a {
+            margin-left: 25px;
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 600;
+            font-size: 15px;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--primary);
+        }
+
+        .hero {
+            background: linear-gradient(135deg, rgba(255,122,96,0.1) 0%, rgba(255,255,255,0) 100%), 
+                        url('https://unsplash.com') no-repeat center center/cover;
+            padding: 120px 20px;
+            text-align: center;
+            border-bottom-left-radius: 40px;
+            border-bottom-right-radius: 40px;
+        }
+
+        .hero h1 {
+            font-size: 52px;
+            font-weight: 900;
+            color: #1a1a1a;
+            margin-bottom: 20px;
+            letter-spacing: -1px;
+        }
+
+        .hero p {
+            font-size: 20px;
+            color: var(--text-muted);
+            max-width: 650px;
+            margin: 0 auto 35px;
+        }
+
+        .btn {
+            background-color: var(--primary);
+            color: white;
+            padding: 14px 35px;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: 700;
+            font-size: 16px;
+            box-shadow: 0 8px 25px rgba(255,122,96,0.3);
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        .btn:hover {
+            background-color: var(--primary-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(255,122,96,0.4);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 80px 20px;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 36px;
+            font-weight: 800;
+            margin-bottom: 50px;
+        }
+
+        .section-title span {
+            color: var(--primary);
+        }
+
+        .pets-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 35px;
+        }
+
+        .pet-card {
+            background: var(--card-bg);
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.04);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid rgba(0,0,0,0.02);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .pet-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+        }
+
+        .image-container {
+            position: relative;
+            width: 100%;
+            height: 280px;
+        }
+
+        .pet-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .pet-badges {
+            position: absolute;
+            bottom: 15px;
+            left: 15px;
+            display: flex;
+            gap: 8px;
+        }
+
+        .badge {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--text-dark);
+            backdrop-filter: blur(5px);
+        }
+
+        .badge.age {
+            background: rgba(255, 122, 96, 0.9);
+            color: white;
+        }
+
+        .pet-info {
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .pet-name {
+            font-size: 24px;
+            font-weight: 800;
+            margin-bottom: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .pet-desc {
+            color: var(--text-muted);
+            font-size: 15px;
+            margin-bottom: 25px;
+            flex-grow: 1;
+        }
+
+        .pet-info .btn {
+            width: 100%;
+            text-align: center;
+            padding: 12px;
+            font-size: 15px;
+        }
+
+        .footer {
+            background-color: #1a1a1a;
+            color: white;
+            text-align: center;
+            padding: 60px 20px;
+            border-top-left-radius: 40px;
+            border-top-right-radius: 40px;
+        }
+
+        .footer p {
+            font-size: 16px;
+            color: #999;
+        }
+
+        .footer .contact-info {
+            margin-top: 15px;
+            font-size: 18px;
+            color: white;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<!-- Этот блок принудительно исправит шапку и добавит серую линию -->
+<style>
+    header {
+        position: sticky !important;
+        top: 0 !important;
+        left: 0 !important;
+        width: 100% !important;
+        z-index: 99999 !important;
+        background: #ffffff !important; /* Чистый белый фон без прозрачности */
+        border-bottom: 2px solid #cccccc !important; /* Четкая серая линия */
+        padding: 20px 40px !important;
+        display: flex !important;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.1) !important;
+    }
+    /* Дополнительно: делаем плашку для текста баннера, чтобы лапки не мешали читать */
+    .hero {
+        background: rgba(255, 255, 255, 0.9) !important; /* Белый блок поверх лапок */
+        border-radius: 20px !important;
+        padding: 40px !important;
+        margin: 20px !important;
+        border: 1px solid #e0e0e0 !important;
+    }
+    .hero h1, .hero p {
+        color: #2d2d2d !important; /* Темный читаемый текст */
+        text-shadow: none !important;
+    }
+</style>
+
+<body>
+
+    <header>
+        <div class="logo">🐾 Лапа Помощи</div>
+        <nav>
+            <a href="#pets">Наши питомцы</a>
+            <a href="#contacts">Контакты</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <h1>Найдите своего верного друга</h1>
+        <p>Каждый хвостик в нашем приюте заслуживает теплого дома и заботливой семьи. Взгляните на тех, кто ждет вас прямо сейчас.</p>
+        <a href="#pets" class="btn">Посмотреть анкеты</a>
+    </section>
+
+    <main class="container" id="pets">
+        <h2 class="section-title">Ищут <span>любящую семью</span></h2>
+        
+        <div class="pets-grid">
+            <!-- Питомец 1 -->
+            <div class="pet-card">
+                <div class="image-container">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNe5aPimqwyzwbplcxTPCxJAsw5KK8Y8JW8xFwe1SLNjyVWjT9JhTq5ysg&s=10" alt="Голден Ретривер Арчи" class="pet-image">
+                    <div class="pet-badges">
+                        <span class="badge">Мальчик</span>
+                        <span class="badge age">1 год</span>
+                    </div>
+                </div>
+                <div class="pet-info">
+                    <h3 class="pet-name">Арчи</h3>
+                    <p class="pet-desc">Настоящий лучик солнца! Жизнерадостный, невероятно дружелюбный пес. Обожает активные игры с мячом и станет идеальным компаньоном.</p>
+                    <a href="contacts.html" class="btn">Познакомиться</a>
+                </div>
+            </div>
+
+            <!-- Питомец 2 -->
+            <div class="pet-card">
+                <div class="image-container">
+                    <img src="https://delo-korm.ru/upload/medialibrary/e2e/%D0%BA%D0%BE%D1%80%D0%B6%D0%B8%D0%BA.jpg" alt="Корги Коржик" class="pet-image">
+                    <div class="pet-badges">
+                        <span class="badge">Мальчик</span>
+                        <span class="badge age">8 месяцев</span>
+                    </div>
+                </div>
+                <div class="pet-info">
+                    <h3 class="pet-name">Коржик</h3>
+                    <p class="pet-desc">Маленький комок энергии на коротких лапках. Очень смышленый, быстро учит команды и всегда находит общий язык с другими животными.</p>
+                    <a href="contacts.html" class="btn">Познакомиться</a>
+                </div>
+            </div>
+
+            <!-- Питомец 3 -->
+            <div class="pet-card">
+                <div class="image-container">
+                    <img src="https://amicus-vet.ru/images/statii/a582d6cs-960.jpg" alt="Котенок Кекс" class="pet-image">
+                    <div class="pet-badges">
+                        <span class="badge">Мальчик</span>
+                        <span class="badge age">3 месяца</span>
+                    </div>
+                </div>
+                <div class="pet-info">
+                    <h3 class="pet-name">Кекс</h3>
+                    <p class="pet-desc">Крошечный пушистый мурлыка. Большую часть времени любит сладко спать или изучать окружающий мир. Идеален для квартиры.</p>
+                    <a href="contacts.html" class="btn">Познакомиться</a>
+                </div>
+            </div>
+
+            <!-- Питомец 4 -->
+<!-- Питомец 4 (Кот Марс с исправленной кнопкой) -->
+<div class="pet-card">
+    <div class="image-container">
+        <img src="https://img.tsn.ua/cached/033/tsn-1284f5ef/thumbs/1200x630/1f/76/7d1b4981454d0a1d9eb4f29b1d2b761f.jpg" alt="Рыжий кот Марс" class="pet-image">
+        <div class="pet-badges">
+            <span class="badge">Мальчик</span>
+            <span class="badge age">2 года</span>
+        </div>
+    </div>
+    <div class="pet-info">
+        <h3 class="pet-name">Марс</h3>
+        <p class="pet-desc">Грациозный и мудрый рыжий кот. Обладает спокойным характером, ценит личные границы, но никогда не откажется от ласки по вечерам.</p>
+        <a href="contacts.html" class="btn">Познакомиться</a>
+    </div>
+</div>
+
+                </div>
+                <div class="pet-info">
+                    <h3 class="pet-name">Марс</h3>
+                    <p class="pet-desc">Грациозный и мудрый рыжий кот. Обладает спокойным характером, ценит личные границы, но никогда не откажется от ласки по вечерам.</p>
